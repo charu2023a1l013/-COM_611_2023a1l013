@@ -1,0 +1,31 @@
+import csv
+num_attributes=6
+a=[]
+print("\n The Given Training Data Set\n")
+with open ('1dataset.csv','r') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        a.append(row)
+        print(row)
+        
+print("\n The initial value of hypothesis:")
+hypothesis=['0']*num_attributes
+print(hypothesis)
+#Initialize hypothesis with the first positive examples
+for j in range(0,num_attributes):
+    hypothesis[j]=a[0][j]
+    
+print("\n Find S: Finding a maximally Specific Hypothesis\n")
+for i in range(0,len(a)): #loop through training examples
+    if a[i][num_attributes] == 'Yes': #Consider only positive examples
+        for j in range(0,num_attributes):
+            if a[i][j] != hypothesis[j]:
+                hypothesis[j]='?'
+            else:
+                hypothesis[j]=a[i][j]
+                
+    #Changed training instance number from (i) to (i+1)
+    print("For Training instance No:{0} the hypothesis is".format(i+1),hypothesis)
+    
+print("\n The Maximally Specific Hypothesis for a given  Training Examples:\n")
+print(hypothesis)
